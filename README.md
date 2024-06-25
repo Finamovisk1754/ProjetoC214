@@ -5,11 +5,11 @@ Este projeto é um sistema de gerenciamento de projetos desenvolvido com Django.
 1.	Autenticação de Usuários:  
 	•	Registro de Usuários: Permite que novos usuários se registrem no sistema.  
 	•	Login/Logout: Autenticação de usuários com opções de login e logout.  
-2.	Gerenciamento de Projetos:  
+2.	Gerenciamento de Projetos:   
 	•	Criação de Projetos: Usuários podem criar novos projetos fornecendo um nome e uma descrição.  
 	•	Visualização de Projetos: Lista de todos os projetos criados pelo usuário.  
 	•	Detalhes do Projeto: Página detalhada que exibe informações sobre um projeto específico, incluindo nome, descrição, data de criação, data de atualização e proprietário.  
-3.	Gerenciamento de Tarefas:  
+3.	Gerenciamento de Tarefas:   
 	•	Criação de Tarefas: Adicionar tarefas a projetos existentes com nome, descrição, data de vencimento e responsável.  
 	•	Visualização de Tarefas: Exibe todas as tarefas associadas a um projeto, incluindo detalhes como nome, descrição, data de vencimento, status de conclusão e responsável.  
 
