@@ -46,6 +46,6 @@ Este projeto é um sistema de gerenciamento de projetos desenvolvido com Django.
 ```
 
 ## Acesso ao projeto
-•	Abra um navegador e acesse http://127.0.0.1:8000.
-•	Faça login com o superusuário que você criou.
-•	Navegue até a URL http://127.0.0.1:8000/project/<project_id>/ para visualizar os detalhes de um projeto específico. Substitua <project_id> pelo ID de um projeto existente no banco de dados.
+•	Abra um navegador e acesse http://127.0.0.1:8000.  
+•	Faça login com o superusuário que você criou.  
+•	Navegue até a URL http://127.0.0.1:8000/project/<project_id>/ para visualizar os detalhes de um projeto específico. Substitua <project_id> pelo ID de um projeto existente no banco de dados.  
