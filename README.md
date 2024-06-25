@@ -18,7 +18,7 @@ Este projeto é um sistema de gerenciamento de projetos desenvolvido com Django.
 	•	Navegue até o diretório do projeto.  
 	•	Ative o ambiente virtual que está na pasta .venv.  
 ```
-  cd path/to/project_management/10
+  cd path/to/project_management/
   source .venv/bin/activate
 ```
 2.	Instalação das Dependências:  
