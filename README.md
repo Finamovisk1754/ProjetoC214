@@ -21,12 +21,12 @@ Este projeto é um sistema de gerenciamento de projetos desenvolvido com Django.
   cd path/to/project_management/10
   source .venv/bin/activate
 ```
-2.	Instalação das Dependências:
+2.	Instalação das Dependências:  
 	•	Instale as dependências listadas no arquivo requirements.txt, se houver.
 ```
   pip install -r requirements.txt
 ```
-3.  Configuração do Banco de Dados:
+3.  Configuração do Banco de Dados:  
 	•	Verifique se o banco de dados SQLite (db.sqlite3) está no diretório correto. Se estiver usando um banco de dados diferente, configure-o no arquivo settings.py.  
 	•	Aplique as migrações para garantir que o banco de dados está atualizado.  
 ```
@@ -34,12 +34,12 @@ Este projeto é um sistema de gerenciamento de projetos desenvolvido com Django.
 ```
 
 ## Execução
-1.	Criação de um Superusuário:
+1.	Criação de um Superusuário:  
 	•	Crie um superusuário para acessar a interface de administração do Django.
 ```
   python manage.py createsuperuser
 ```
-2.	Execução do Servidor de Desenvolvimento:
+2.	Execução do Servidor de Desenvolvimento:  
 	•	Inicie o servidor de desenvolvimento do Django.
 ```
   python manage.py runserver
