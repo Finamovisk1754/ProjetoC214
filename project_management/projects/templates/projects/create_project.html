@@ -1,0 +1,17 @@
+<!-- projects/templates/projects/create_project.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Projeto</title>
+</head>
+<body>
+    <h2>Criar Novo Projeto</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Criar Projeto</button>
+    </form>
+</body>
+</html>

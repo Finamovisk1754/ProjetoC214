@@ -1,0 +1,30 @@
+<!-- projects/templates/projects/home.html -->
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h1>Bem-vindo, {{ user.username }}!</h1>
+    <h2>Seus Projetos:</h2>
+    <ul>
+        {% for project in projects %}
+            <li>
+                {{ project.name }}
+                <a href="{% url 'project_detail' project.id %}"><button>Detalhes</button></a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_project' %}">Criar Novo Projeto</a>
+</body>
+</html>

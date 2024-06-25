@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Register</h2>
+  <form id="register-form" method="post">
+    {% csrf_token %}
+    
+    <!-- Exibe mensagens de erro do formulário -->
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        <strong>Error:</strong> Please correct the following errors.
+        <ul>
+          {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+              <li>{{ field }}: {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+  </form>
+{% endblock %}

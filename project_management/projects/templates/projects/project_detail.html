@@ -1,0 +1,17 @@
+<!-- projects/templates/projects/project_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Projeto</title>
+</head>
+<body>
+    <h1>{{ project.name }}</h1>
+    <p><strong>Descrição:</strong> {{ project.description }}</p>
+    <p><strong>ID do Projeto:</strong> {{ project.id }}</p>
+    <p><strong>Data de Criação:</strong> {{ project.created_at }}</p>
+    <p><strong>Última Atualização:</strong> {{ project.updated_at }}</p>
+    <p><strong>Proprietário:</strong> {{ project.owner.username }}</p>
+</body>
+</html>
