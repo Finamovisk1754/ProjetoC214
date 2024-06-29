@@ -1,77 +1,27 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from projects.models import Projeto, Tarefa , status
-from rest_framework.test import APIClient
+from django.urls import reverse
+from .models import Project, Task
 
-class ProjetoModelTests(TestCase):
+
+class ProjectTestCase(TestCase):
     def setUp(self):
-        self.usuario = User.objects.create_user(username='teste_usuario', password='senha')  
-        self.projeto = Projeto.objects.create(
-            nome='Projeto de Teste',  
-            descricao='Descrição do projeto',
-            data_inicio='2024-01-01',
-            data_fim='2024-12-31',
-            responsavel=self.usuario
-        )
-
-    def test_projeto_criacao(self):
-        self.assertEqual(self.projeto.nome, 'Projeto de Teste')  
-        self.assertEqual(self.projeto.responsavel.username, 'teste_usuario')
-
-class TarefaModelTests(TestCase):
-    def setUp(self):
-        self.usuario = User.objects.create_user(username='teste_usuario', password='senha') 
-        self.projeto = Projeto.objects.create(
-            nome='Projeto de Teste',  
-            descricao='Descrição do projeto',
-            data_inicio='2024-01-01',
-            data_fim='2024-12-31',
-            responsavel=self.usuario
-        )
-        self.tarefa = Tarefa.objects.create(
-            projeto=self.projeto,
-            nome='Tarefa de Teste',  
-            descricao='Descrição da tarefa',
-            data_conclusao='2024-06-01', 
-            concluida=False
-        )
-
-    def test_tarefa_criacao(self):
-        self.assertEqual(self.tarefa.nome, 'Tarefa de Teste')  
-        self.assertFalse(self.tarefa.concluida)
-
-class TaskAPITests(TestCase):
-    def setUp(self):
-        self.client = APIClient()
-        self.user = User.objects.create_user(username='teste_usuario', password='senha')
-        self.client.login(username='teste_usuario', password='senha')
-        self.project = Projeto.objects.create(
-            name='Projeto de Teste',  
-            descricao='Descrição do projeto', 
-            data_inicio='2024-01-01',
-            data_fim='2024-12-31',
-            responsavel=self.user
-        )
-        self.tarefa = Tarefa.objects.create(  #
-            projeto=self.project,
-            nome='Tarefa de Teste',  
-            descricao='Descrição da tarefa',  
-            data_conclusao='2024-06-01',  
-            concluida=False
-        )
-
-    def test_get_tasks(self):
-        response = self.client.get('/api/tarefas/')  
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.user = User.objects.create_user(username='testuser', password='12345')
+        self.client.login(username='testuser', password='12345')
+        self.project = Project.objects.create(name='Test Project', description='Test Description', created_by=self.user)
 
     def test_create_task(self):
-        data = {
-            'projeto': self.project.id,
-            'nome': 'Nova Tarefa',  
-            'descricao': 'Descrição da nova tarefa',  
-            'data_conclusao': '2024-06-01',  
-            'concluida': False
-        }
-        response = self.client.post('/api/tarefas/', data) 
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        url = reverse('create_task', args=[self.project.id])
+        response = self.client.post(url, {
+            'name': 'Task 1',
+            'description': 'Task Description',
+            'assignee': self.user.id,
+            'due_date': '2024-06-30'
+        })
+        self.assertEqual(response.status_code, 302)  # Redirecionamento após criação
+
+        # Verificar se a tarefa foi criada
+        task_count = Task.objects.filter(name='Task 1').count()
+        self.assertEqual(task_count, 1)
+
 
