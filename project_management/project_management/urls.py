@@ -1,17 +1,8 @@
-
 from django.contrib import admin
-from django.urls import path, include, router
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('projects.urls')),
-]
-
-urlpatterns = [
-    path('', include(router.urls)),
+    path('', include('projects.urls')),  # Inclui as URLs do aplicativo 'projects'
+   
 ]
