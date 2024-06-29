@@ -31,7 +31,7 @@ jobs:
     - name: Run tests
       run: |
         source venv/bin/activate
-        python -m unittest discover -s /project_management/projects -p "*.py"
+        python -m unittest discover -s /project_management/projects -p "tests.py"
 
   build:
 
