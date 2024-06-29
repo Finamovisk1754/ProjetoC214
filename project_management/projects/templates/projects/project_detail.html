@@ -1,17 +1,42 @@
-<!-- projects/templates/projects/project_detail.html -->
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalhes do Projeto</title>
-</head>
-<body>
-    <h1>{{ project.name }}</h1>
-    <p><strong>Descrição:</strong> {{ project.description }}</p>
-    <p><strong>ID do Projeto:</strong> {{ project.id }}</p>
-    <p><strong>Data de Criação:</strong> {{ project.created_at }}</p>
-    <p><strong>Última Atualização:</strong> {{ project.updated_at }}</p>
-    <p><strong>Proprietário:</strong> {{ project.owner.username }}</p>
-</body>
-</html>
+{% block title %}Detalhes do Projeto{% endblock %}
+
+{% block content %}
+  <h2 class="my-4">Detalhes do Projeto: {{ project.name }}</h2>
+  <p>{{ project.description }}</p>
+
+  <h3 class="mt-4">Tarefas</h3>
+  <ul class="list-group mb-4">
+    {% for task in tasks %}
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ task.title }}</strong> - {{ task.description }}
+          </div>
+          <div>
+            <a href="{% url 'delete_task' task_id=task.id %}" class="btn btn-danger btn-sm">Excluir Tarefa</a>
+            <a href="{% url 'upload_task_response' task_id=task.id %}" class="btn btn-primary btn-sm">Adicionar Resposta</a>
+          </div>
+        </div>
+        <ul class="list-group mt-2">
+          {% for response in task.responses.all %}
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <a href="{% url 'view_task_response' response_id=response.id %}">{{ response.file.name }}</a> - {{ response.uploaded_at }}
+                </div>
+                <div>
+                  <a href="{% url 'delete_task_response' response_id=response.id %}" class="btn btn-danger btn-sm">Excluir Resposta</a>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'create_task' project_id=project.id %}" class="btn btn-success">Adicionar Tarefa</a>
+  <a href="{% url 'delete_project' project_id=project.id %}" class="btn btn-danger">Excluir Projeto</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload de Resposta{% endblock %}
+
+{% block content %}
+  <h2 class="my-4">Upload de Resposta para Tarefa: {{ task.title }}</h2>
+  <form method="POST" enctype="multipart/form-data" class="mb-4">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-primary">Fazer Upload</button>
+  </form>
+
+  <h3>Respostas</h3>
+  <ul class="list-group mb-4">
+    {% for response in responses %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <a href="{% url 'view_task_response' response_id=response.id %}">{{ response.file.name }}</a> - {{ response.uploaded_at }}
+        </div>
+        <div>
+          <a href="{% url 'delete_task_response' response_id=response.id %}" class="btn btn-danger btn-sm">Excluir</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'project_detail' project_id=task.project.id %}" class="btn btn-secondary">Voltar ao Projeto</a>
+{% endblock %}

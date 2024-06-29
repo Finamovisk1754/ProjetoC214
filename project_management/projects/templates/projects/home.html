@@ -1,30 +1,23 @@
-<!-- projects/templates/projects/home.html -->
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+{% block title %}Meus Projetos{% endblock %}
 
-    <h1>Bem-vindo, {{ user.username }}!</h1>
-    <h2>Seus Projetos:</h2>
-    <ul>
-        {% for project in projects %}
-            <li>
-                {{ project.name }}
-                <a href="{% url 'project_detail' project.id %}"><button>Detalhes</button></a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'create_project' %}">Criar Novo Projeto</a>
-</body>
-</html>
+{% block content %}
+  <h2 class="my-4">Meus Projetos</h2>
+  <div class="mb-4">
+    <a href="{% url 'create_project' %}" class="btn btn-success">Criar Novo Projeto</a>
+  </div>
+  <ul class="list-group">
+    {% for project in projects %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ project.name }}</strong> - {{ project.description }}
+        </div>
+        <div>
+          <a href="{% url 'project_detail' project_id=project.id %}" class="btn btn-primary btn-sm">Ver Detalhes</a>
+          <a href="{% url 'delete_project' project_id=project.id %}" class="btn btn-danger btn-sm">Excluir</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
