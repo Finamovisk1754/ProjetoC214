@@ -22,16 +22,10 @@ jobs:
         source venv/bin/activate
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: List files for debug
-      run: |
-        ls -al
-        ls -al venv
-        ls -al test
-
     - name: Run tests
       run: |
         source venv/bin/activate
-        python -m unittest discover -s /project_management/projects -p "tests.py"
+        python -m unittest discover -s test -p "*.py"
 
   build:
 
@@ -55,5 +49,6 @@ jobs:
 
     - name: Build application
       run: |
-        echo "Building the application..."
+        
+
         
