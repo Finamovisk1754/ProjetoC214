@@ -1,13 +1,17 @@
-
 from django import forms
-from .models import Task 
 from django.contrib.auth.models import User
-from .models import Project
+from .models import Project, ResponseFile
+from .models import Task, TaskResponse
 
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['name', 'description', 'assignee', 'due_date']
+        fields = ['name', 'description', 'completed']
+
+class TaskResponseForm(forms.ModelForm):
+    class Meta:
+        model = TaskResponse
+        fields = ['file']
  
 
 class UserForm(forms.ModelForm):
@@ -21,4 +25,9 @@ class UserForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['name', 'description']
+        fields = ['name', 'description'] 
+
+class ResponseFileForm(forms.ModelForm):
+    class Meta:
+        model = ResponseFile
+        fields = ['file'] 
